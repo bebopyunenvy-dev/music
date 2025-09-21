@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>不間斷音樂播放</title>
+
+</head>
+
+<body>
+    <h1>好歌推推</h1>
+    <audio id="player" controls></audio>
+
+    <div>
+        <button id="prev">上一首</button>
+        <button id="next">下一首</button>
+    </div>
+
+    <script>
+        const playlist = ['audio/deep.mp3', 'audio/gardens.mp3', 'audio/move.mp3', 'audio/sad.mp3'];
+
+        let index = 0;
+        const player = document.getElementById('player')
+        // 設定初始音樂
+        player.src = playlist[index];
+
+        // 當音樂播完自動播放下一首
+        player.addEventListener('ended', () => {
+            index++;
+            if (index >= playlist.length) {
+                index = 0;
+            }
+            player.src = playlist[index];
+            player.play();
+        });
+
+        // 上一首
+        document.getElementById('prev').addEventListener('click', () => {
+            index--;
+            if (index < 0) {
+                index = playlist.length - 1;
+            }
+            player.src = playlist[index];
+            player.play();
+
+        });
+
+        // 下一首
+        document.getElementById('next').addEventListener('click', () => {
+            index++;
+            if (index >= playlist.length) {
+                index = 0;
+            }
+            player.src = playlist[index];
+            player.play();
+        });
+
+
+    </script>
+
+
+
+</body>
+
+</html>
